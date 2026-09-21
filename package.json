@@ -1,0 +1,48 @@
+{
+  "name": "@majid-superior/sell-digital-assets-theme",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Shared theme, tokens, and Tailwind v4 CSS for Sell Digital Assets platform",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./css": "./dist/index.css",
+    "./css/*": "./dist/*.css",
+    "./assets/*": "./dist/assets/*",
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "author": "majid-superior",
+  "scripts": {
+    "build": "tsup && tsx scripts/copy-css.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/majid-superior/sell-digital-assets-theme.git"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "tsup": "^8.3.6",
+    "tsx": "^4.23.15",
+    "typescript": "^5.7.3"
+  }
+}
