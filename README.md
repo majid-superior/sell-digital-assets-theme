@@ -1,14 +1,16 @@
 # @majid-superior/sell-digital-assets-theme
 
-Shared design tokens, Tailwind v4 theme, and CSS resets for the **Sell Digital Assets** platform.
+Shared design tokens, Tailwind v4 theme, React theme engine, and brand SVG iconography for the **Sell Digital Assets** platform.
 
 ## Features
 
 - **Design Tokens**: Typed TypeScript constants for colors, typography, spacing, breakpoints, and layout.
-- **Dual Module Output**: Full ESM (`.js`, `.d.ts`) and CommonJS (`.cjs`, `.d.cts`) builds.
-- **Tailwind v4 CSS**: Pre-configured `@theme` CSS with light and dark mode variable sets.
+- **Tailwind v4 CSS**: Pre-configured `@theme` CSS with light and dark mode variable sets, resets, and self-hosted fonts.
+- **React Theme Engine**: Zero-friction theme state management (`<ThemeProvider>`, `useTheme`) synchronizing HTML `data-theme` attribute and `dark` class with `localStorage` and system color scheme.
+- **Brand SVG Iconography**: Standardized React SVG components matching design system geometry (`Github`, `Google`, `Discord`, `Twitter`, `Figma`, etc.).
 - **Self-Hosted Web Fonts**: Bundled Plus Jakarta Sans variable font with zero external network dependencies.
-- **CSS Resets & Utilities**: Normalization layer tailored for the platform.
+- **Dual Module Output**: Full ESM (`.js`, `.d.ts`) and CommonJS (`.cjs`, `.d.cts`) builds.
+- **Subpath Exports**: Dedicated entry points (`/react`, `/icons`, `/css`) for optimized bundle sizes and tree-shaking.
 
 ---
 
@@ -55,7 +57,58 @@ You can also import individual stylesheets:
 @import "@majid-superior/sell-digital-assets-theme/css/fonts.css";
 ```
 
-### 2. In React / TypeScript
+### 2. React Theme Engine (`@majid-superior/sell-digital-assets-theme/react`)
+
+Wrap your application in `ThemeProvider` and consume with `useTheme`:
+
+```tsx
+import { ThemeProvider, useTheme } from "@majid-superior/sell-digital-assets-theme/react";
+
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+  return (
+    <button onClick={toggleTheme}>
+      Current: {theme}
+    </button>
+  );
+}
+
+export function App() {
+  return (
+    <ThemeProvider defaultTheme="light">
+      <ThemeToggle />
+    </ThemeProvider>
+  );
+}
+```
+
+### 3. Brand SVG Icons (`@majid-superior/sell-digital-assets-theme/icons`)
+
+```tsx
+import {
+  Brand,
+  Github,
+  Google,
+  Discord,
+  Twitter,
+  Figma,
+} from "@majid-superior/sell-digital-assets-theme/icons";
+
+export function Footer() {
+  return (
+    <footer>
+      <Brand size={24} />
+      <div className="flex gap-2">
+        <Github size={18} />
+        <Google size={18} />
+        <Discord size={18} />
+      </div>
+    </footer>
+  );
+}
+```
+
+### 4. Design Tokens (`@majid-superior/sell-digital-assets-theme`)
 
 ```tsx
 import {
@@ -64,35 +117,7 @@ import {
   COLOR_TOKENS,
   LAYOUT_TOKENS,
   TYPOGRAPHY_TOKENS,
-  type ThemeTokens,
-  type ColorScheme,
 } from "@majid-superior/sell-digital-assets-theme";
-
-export function Header() {
-  return (
-    <header className="bg-surface text-on-surface border-b border-outline">
-      <h1 className="text-display-hero">Sell Digital Assets</h1>
-      <p style={{ color: COLOR_HEX_MAP.light.primary }}>
-        Welcome to the marketplace!
-      </p>
-    </header>
-  );
-}
-```
-
-### 3. In Backend / Node.js (Email Templates, Canvas, etc.)
-
-```typescript
-import { COLOR_HEX_MAP, TOKENS } from "@majid-superior/sell-digital-assets-theme";
-
-export function generateInvoiceHtml(orderId: string, amount: string) {
-  return `
-    <div style="font-family: ${TOKENS.typography.fonts.sans}; color: ${COLOR_HEX_MAP.light.onSurface};">
-      <h2 style="color: ${COLOR_HEX_MAP.light.primary};">Invoice #${orderId}</h2>
-      <p>Amount: ${amount}</p>
-    </div>
-  `;
-}
 ```
 
 ---

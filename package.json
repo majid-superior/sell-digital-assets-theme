@@ -1,13 +1,16 @@
 {
   "name": "@majid-superior/sell-digital-assets-theme",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "type": "module",
-  "description": "Shared theme, tokens, and Tailwind v4 CSS for Sell Digital Assets platform",
+  "description": "Shared theme, design tokens, Tailwind v4 CSS, React theme provider, and brand icons for Sell Digital Assets platform",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
+  ],
+  "sideEffects": [
+    "*.css"
   ],
   "exports": {
     ".": {
@@ -23,7 +26,39 @@
     "./css": "./dist/index.css",
     "./css/*": "./dist/*.css",
     "./assets/*": "./dist/assets/*",
+    "./react": {
+      "import": {
+        "types": "./dist/react/index.d.ts",
+        "default": "./dist/react/index.js"
+      },
+      "require": {
+        "types": "./dist/react/index.d.cts",
+        "default": "./dist/react/index.cjs"
+      }
+    },
+    "./icons": {
+      "import": {
+        "types": "./dist/icons/index.d.ts",
+        "default": "./dist/icons/index.js"
+      },
+      "require": {
+        "types": "./dist/icons/index.d.cts",
+        "default": "./dist/icons/index.cjs"
+      }
+    },
     "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   },
   "license": "MIT",
   "author": "majid-superior",
@@ -40,7 +75,11 @@
     "url": "git+https://github.com/majid-superior/sell-digital-assets-theme.git"
   },
   "devDependencies": {
-    "@types/node": "^26.6.2",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "tsup": "^8.3.6",
     "tsx": "^4.23.15",
     "typescript": "^5.7.3"
