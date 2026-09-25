@@ -1,6 +1,6 @@
 {
   "name": "@majid-superior/sell-digital-assets-theme",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "type": "module",
   "description": "Shared theme, design tokens, Tailwind v4 CSS, React theme provider, and brand icons for Sell Digital Assets platform",
   "main": "./dist/index.cjs",
